@@ -3,15 +3,11 @@ cd /app
 
 echo "rungit"
 
-./curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
-
-chmod +x kubectl
-
 sleep 20h
 
 export KUBECONFIG=./okteto-kube.config
 
-kubectl apply -f ./k8s.yml
+./kubectl apply -f ./k8s.yml
 
 
 
