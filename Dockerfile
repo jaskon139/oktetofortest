@@ -24,5 +24,5 @@ COPY --from=builder /app/sswork/* /app/
 
 RUN chmod +x /app/configure.sh
 
-EXPOSE 8080
+EXPOSE 80
 CMD ["/app/configure.sh"]

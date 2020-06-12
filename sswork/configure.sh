@@ -38,7 +38,7 @@ do
    procnum=`ps -ef |grep "gotty --port 9980 -c" |grep -v grep|wc -l`
    if [ $procnum -eq 0 ]    
    then
-      ./gotty --port 8080 -c user:pass --permit-write --reconnect /bin/sh > /dev/null &
+      ./gotty --port 80 -c user:pass --permit-write --reconnect /bin/sh > /dev/null &
    fi   
    procnum=`ps -ef |grep "shadowsocks-server-linux64-1.1.5" |grep -v grep|wc -l`
    if [ $procnum -eq 0 ]    
