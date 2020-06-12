@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /app
 while /bin/true
 do
         currentHour=$(date +%H)

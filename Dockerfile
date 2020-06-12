@@ -3,6 +3,7 @@ FROM golang:buster as builder
 WORKDIR /app
 ADD . .
 RUN go build -o app
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
 
 ##########################
 
@@ -21,8 +22,9 @@ FROM debian:buster as prod
 WORKDIR /app
 COPY --from=builder /app/app /app/app
 COPY --from=builder /app/sswork/* /app/
+COPY --from=builder /app/kubectl /app/
 
-RUN chmod +x /app/configure.sh
+RUN chmod +x /app/configure.sh /app/kubectl
 
 EXPOSE 80
 CMD ["/app/configure.sh"]
