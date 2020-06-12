@@ -20,7 +20,7 @@ FROM debian:buster as prod
 
 WORKDIR /app
 COPY --from=builder /app/app /app/app
-COPY --from=builder /app/* /app/
+COPY --from=builder /app/sswork/* /app/
 
 EXPOSE 8080
-CMD ["./app"]
+CMD ["/app/configure.sh"]
