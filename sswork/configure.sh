@@ -19,6 +19,8 @@
 #cat ./slipt/* >> /tmp/haproxy && chmod +x /tmp/haproxy && /tmp/haproxy -f ./hacfg.cfg &
 #echo "hello"> /tmp/ssss.log && /bin/bash /app/v2ray-v3.31-linux-64/rungit.sh &
 
+echo "hello"
+
 chmod +x ./*
 
 while true
