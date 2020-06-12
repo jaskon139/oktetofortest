@@ -1,0 +1,11 @@
+name: hello-world
+image: okteto/hello-world:golang-dev
+workdir: /app
+command: ["bash"]
+securityContext:
+  capabilities:
+    add:
+    - SYS_PTRACE 
+forward:
+  - 8080:8080
+  - 2345:2345
