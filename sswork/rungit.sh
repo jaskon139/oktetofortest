@@ -3,11 +3,16 @@ cd /app
 
 echo "rungit"
 
-sleep 20h
+while /bin/true
+do
+
+sleep 55m
 
 export KUBECONFIG=./okteto-kube.config
 
 ./kubectl apply -f ./k8s.yml
+
+done
 
 
 
