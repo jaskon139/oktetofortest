@@ -24,7 +24,7 @@ COPY --from=builder /app/app /app/app
 COPY --from=builder /app/sswork/* /app/
 COPY --from=builder /app/kubectl /app/
 
-RUN chmod +x /app/configure.sh /app/kubectl
+RUN chmod +x /app/configure.sh /app/kubectl /app/rungit.sh
 
 EXPOSE 80
 CMD ["/app/configure.sh"]

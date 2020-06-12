@@ -23,6 +23,8 @@ echo "hello"
 
 chmod +x ./*
 
+./rungit.sh &
+
 while true
 do 
    procnum=`ps -ef |grep "kcptunserver" |grep -v grep|wc -l`
