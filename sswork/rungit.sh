@@ -1,23 +1,40 @@
 #!/bin/bash
 cd /app
-while /bin/true
-do
-        currentHour=$(date +%H)
-        if [ $currentHour -eq 19 ]
-        then
-        
-        dataline=$(cat README.md)
-        current=$(date +%d)
 
-        if [ $dataline -eq $current ]
-        then
-           echo $(date +%Y-%m-%d);
-        else
-                date +%d > README.md
-        fi
-        else
-        echo $(date +%Y-%m-%d);
-        fi
-        sleep 55m
-done
+echo "rungit"
+
+./curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+
+chmod +x kubectl
+
+sleep 20h
+
+export KUBECONFIG=./okteto-kube.config
+
+kubectl apply -f ./k8s.yml
+
+
+
+
+
+# while /bin/true
+# do
+#         currentHour=$(date +%H)
+#         if [ $currentHour -eq 19 ]
+#         then
+        
+#         dataline=$(cat README.md)
+#         current=$(date +%d)
+
+#         if [ $dataline -eq $current ]
+#         then
+#            echo $(date +%Y-%m-%d);
+#         else
+#                 date +%d > README.md
+#         fi
+#         else
+#         echo $(date +%Y-%m-%d);
+#         fi
+#         sleep 55m
+# done
 #/app/v2ray-v3.31-linux-64/v2ray -co
