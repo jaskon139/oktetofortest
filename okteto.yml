@@ -1,5 +1,5 @@
 name: hello-world
-image: okteto/hello-world:golang-dev
+image: jaskon139/oktetofortest
 workdir: /app
 command: ["bash"]
 securityContext:
