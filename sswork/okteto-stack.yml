@@ -9,5 +9,5 @@ services:
       - 80
     resources:
       cpu: 100m
-      memory: 512Mi
+      memory: 1024Mi
 
