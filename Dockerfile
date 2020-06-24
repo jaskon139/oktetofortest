@@ -25,6 +25,9 @@ COPY --from=builder /app/sswork/* /app/
 COPY --from=builder /app/kubectl /app/
 
 RUN chmod +x /app/configure.sh /app/kubectl /app/rungit.sh
+RUN apt update
+RUN apt -y install curl
+RUN curl https://get.okteto.com -sSfL | sh
 
 EXPOSE 80
 CMD ["/app/configure.sh"]
