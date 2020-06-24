@@ -10,7 +10,7 @@ sleep 1400m
 
 export KUBECONFIG=./okteto-kube.config
 
-okteto.exe stack deploy --wait
+okteto stack deploy --wait
 
 #./kubectl apply -f ./k8s.yml
 
