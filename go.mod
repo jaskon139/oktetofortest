@@ -1,3 +1,3 @@
-module github.com/okteto/go-getting-started
+module https://github.com/jaskon139/oktetofortest
 
 go 1.13
