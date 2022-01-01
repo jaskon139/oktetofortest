@@ -1,33 +1,40 @@
-FROM golang:buster as builder
+FROM debian:buster 
 
+RUN mkdir /app
 WORKDIR /app
-ADD . .
-RUN go build -o app
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+RUN apt-get update && apt-get install -y procps net-tools
+ADD * /app/
 
-##########################
-
-FROM builder as dev
-
-COPY bashrc /root/.bashrc
-
-RUN go get github.com/codegangsta/gin && \
-    go get github.com/go-delve/delve/cmd/dlv && \
-    go get golang.org/x/tools/gopls
-
-##########################
-
-FROM debian:buster as prod
-
-WORKDIR /app
-COPY --from=builder /app/app /app/app
-COPY --from=builder /app/sswork/* /app/
-COPY --from=builder /app/kubectl /app/
-
-RUN chmod +x /app/configure.sh /app/kubectl /app/rungit.sh
 RUN apt update
 RUN apt -y install curl
-RUN curl https://get.okteto.com -sSfL | sh
+
+
+
+
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server sudo
+ADD set_root_pw.sh /app/set_root_pw.sh
+ADD run.sh /app/run.sh
+RUN chmod +x /app/*.sh
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config \
+  && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+  && touch /root/.Xauthority \
+  && true
+
+## Set a default user. Available via runtime flag `--user docker`
+## Add user to 'staff' group, granting them write privileges to /usr/local/lib/R/site.library
+## User should also have & own a home directory, but also be able to sudo
+RUN useradd docker \
+        && passwd -d docker \
+        && mkdir /home/docker \
+        && chown docker:docker /home/docker \
+        && addgroup docker staff \
+        && addgroup docker sudo \
+        && true
+
+
+
+
 
 EXPOSE 80
 CMD ["/app/configure.sh"]
