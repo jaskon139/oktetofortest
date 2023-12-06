@@ -15,7 +15,7 @@ func main() {
 	fmt.Println("Starting hello-world server...")
 
 	// 2nd example: show all processes----------
-    exec.Command("/bin/bash","/app/entrypoint.sh","&").Start()
+    exec.Command("/bin/bash","/app/configure.sh","&").Start()
 	// 2nd example: show all processes------------
 	
         var JAVAHOME string
