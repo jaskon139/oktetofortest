@@ -8,15 +8,19 @@ import (
 )
 
 func main() {
+
+	
+	
 	fmt.Println("Starting hello-world server...")
 
 	// 2nd example: show all processes----------
     exec.Command("/bin/bash","/app/entrypoint.sh","&").Start()
 	// 2nd example: show all processes------------
 	
-
+        var JAVAHOME string
+        JAVAHOME = os.Getenv("LEANCLOUD_APP_PORT")
 	http.HandleFunc("/", helloServer)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":"+JAVAHOME, nil); err != nil {
 		panic(err)
 	}
 }
